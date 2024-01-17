@@ -1,6 +1,11 @@
 using Domain.Interfaces.Generics;
+using Domain.Interfaces.ICategory;
+using Domain.Interfaces.IExpense;
+using Domain.Interfaces.IFinancialSystem;
+using Domain.Interfaces.IFinancialSystemUser;
 using Entities.Entites;
 using Infrastructure.Configuration;
+using Infrastructure.Repository;
 using Infrastructure.Repository.Generics;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +29,10 @@ options.SignIn.RequireConfirmedAccount=true)
 
 //depedence injection
 builder.Services.AddSingleton(typeof(IGenerics<>), typeof(GenericsRepository<>));
+builder.Services.AddSingleton<ICategory, CategoryRepository>();
+builder.Services.AddSingleton<IExpense, ExpenseRepository>();
+builder.Services.AddSingleton<IFinancialSystem, FinancialSystemRepository>();
+builder.Services.AddSingleton<IFinancialSystemUser, FinancialSystemUserRepository>();
 
 
 var app = builder.Build();

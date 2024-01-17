@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.IExpense
 {
-    public interface IExpense 
+    public interface IExpense :IGenerics<Expense>
     {
+        Task<IList<Expense>> UserExpensesList(string userEmail);
+
+        Task<IList<Expense>> NotPaidLastMonthUserExpensesList(string userEmail);
+
     }
 }

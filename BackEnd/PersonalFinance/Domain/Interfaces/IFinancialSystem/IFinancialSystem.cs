@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.IFinancialSystem
 {
-    public interface IFinancialSystem 
+    public interface IFinancialSystem : IGenerics<FinancialSystem>
     {
+        Task<IList<FinancialSystem>> UserSystemList(string userEmail);
 
     }
 }

@@ -8,7 +8,14 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.IFinancialSystemUser
 {
-    public interface IFinancialSystemUser
+    public interface IFinancialSystemUser : IGenerics<FinancialSystemUser>
     {
+
+        Task<IList<FinancialSystemUser>> SystemUsersList(int FinancailSystemId);
+
+        Task RemoveUsers(List<FinancialSystemUser> users);
+
+        Task<FinancialSystemUser> GetSystemUsersByEmail(string userEmail);
+
     }
 }

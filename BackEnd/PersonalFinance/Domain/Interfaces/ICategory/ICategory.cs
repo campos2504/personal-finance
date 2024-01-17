@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.ICategory
 {
-    public interface ICategory
+    public interface ICategory : IGenerics<Category>
     {
+        Task<IList<Category>> UserCategoriesList(string email);
 
     }
 }
