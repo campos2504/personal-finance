@@ -8,7 +8,7 @@ namespace Entities.Entites
     {
         [ForeignKey("Financialsystem")]
         [Column(Order = 1)]
-        public int SystemId { get; set; }
+        public int FinancialSystemId { get; set; }
         public virtual FinancialSystem? FinancialSystem { get; set; }
 
     }

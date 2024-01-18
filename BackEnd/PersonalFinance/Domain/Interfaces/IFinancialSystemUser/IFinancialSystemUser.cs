@@ -11,7 +11,7 @@ namespace Domain.Interfaces.IFinancialSystemUser
     public interface IFinancialSystemUser : IGenerics<FinancialSystemUser>
     {
 
-        Task<IList<FinancialSystemUser>> SystemUsersList(int FinancailSystemId);
+        Task<IList<FinancialSystemUser>> SystemUsersList(int financailSystemId);
 
         Task RemoveUsers(List<FinancialSystemUser> users);
 

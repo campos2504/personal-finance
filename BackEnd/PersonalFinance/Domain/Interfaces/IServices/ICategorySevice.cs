@@ -10,8 +10,5 @@ namespace Domain.Interfaces.IServices
     public interface ICategorySevice
     {
 
-        Task<IList<Category>> UserCategoriesList(string email);
-
-
     }
 }
