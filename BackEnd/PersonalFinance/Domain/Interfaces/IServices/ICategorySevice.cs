@@ -9,6 +9,8 @@ namespace Domain.Interfaces.IServices
 {
     public interface ICategorySevice
     {
+        Task AddCategiory(Category category);
 
+        Task UpdateCategiory(Category category);
     }
 }

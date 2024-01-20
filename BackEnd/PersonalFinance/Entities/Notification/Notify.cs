@@ -18,14 +18,14 @@ namespace Entities.Notification
         [NotMapped]
         public List<Notify> Notifications { get; set; }
 
-        public bool StringPropertieValidation(string value, string propertierName)
+        public bool StringPropertieValidation(string value, string propertyName)
         {
-            if (string.IsNullOrWhiteSpace(value)|| string.IsNullOrWhiteSpace(propertierName))
+            if (string.IsNullOrWhiteSpace(value)|| string.IsNullOrWhiteSpace(propertyName))
             {
                 Notifications.Add(new Notify 
                 { 
                     Message = "Field value is empty",
-                    PropertieName = propertierName
+                    PropertieName = propertyName
                 });
 
                 return false;
@@ -34,14 +34,14 @@ namespace Entities.Notification
             return true;
         }
         
-        public bool IntPropertieValidaiton(int value, string propertierName)
+        public bool IntPropertieValidaiton(int value, string propertyName)
         {
-            if(value < 0 || string.IsNullOrWhiteSpace(propertierName))
+            if(value < 0 || string.IsNullOrWhiteSpace(propertyName))
             {
                 Notifications.Add(new Notify
                 {
                     Message = "Field value is invalid",
-                    PropertieName = propertierName
+                    PropertieName = propertyName
                 });
                 return false;
             }

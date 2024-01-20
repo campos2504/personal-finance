@@ -3,6 +3,8 @@ using Domain.Interfaces.ICategory;
 using Domain.Interfaces.IExpense;
 using Domain.Interfaces.IFinancialSystem;
 using Domain.Interfaces.IFinancialSystemUser;
+using Domain.Interfaces.IServices;
+using Domain.Services;
 using Entities.Entites;
 using Infrastructure.Configuration;
 using Infrastructure.Repository;
@@ -27,13 +29,21 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options=>
 options.SignIn.RequireConfirmedAccount=true)
     .AddEntityFrameworkStores<BaseContext>();
 
-//depedence injection
+#region DepedenceInjection
 builder.Services.AddSingleton(typeof(IGenerics<>), typeof(GenericsRepository<>));
+//Repositorie
 builder.Services.AddSingleton<ICategory, CategoryRepository>();
 builder.Services.AddSingleton<IExpense, ExpenseRepository>();
 builder.Services.AddSingleton<IFinancialSystem, FinancialSystemRepository>();
 builder.Services.AddSingleton<IFinancialSystemUser, FinancialSystemUserRepository>();
 
+//Sevices
+builder.Services.AddSingleton<ICategorySevice, CategorySevice>();
+builder.Services.AddSingleton<IExpenseService, ExpenseService>();
+builder.Services.AddSingleton<IExpenseService, ExpenseService>();
+builder.Services.AddSingleton<IFinancialSystemService, FinancialSystemService>();
+builder.Services.AddSingleton<IFinancialSystemUserService, FinancialSystemUserService>();
+#endregion
 
 var app = builder.Build();
 
