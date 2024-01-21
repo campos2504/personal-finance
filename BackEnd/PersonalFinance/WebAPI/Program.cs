@@ -10,7 +10,10 @@ using Infrastructure.Configuration;
 using Infrastructure.Repository;
 using Infrastructure.Repository.Generics;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using WebAPI.Token;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +48,37 @@ builder.Services.AddSingleton<IFinancialSystemService, FinancialSystemService>()
 builder.Services.AddSingleton<IFinancialSystemUserService, FinancialSystemUserService>();
 #endregion
 
+#region Athentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+             .AddJwtBearer(option =>
+             {
+                 option.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     ValidateIssuer = false,
+                     ValidateAudience = false,
+                     ValidateLifetime = true,
+                     ValidateIssuerSigningKey = true,
+
+                     ValidIssuer = "Test.Securiry.Bearer",
+                     ValidAudience = "Test.Securiry.Bearer",
+                     IssuerSigningKey = JwtSecurityKey.Create("Secret_Key-12345678")
+                 };
+
+                 option.Events = new JwtBearerEvents
+                 {
+                     OnAuthenticationFailed = context =>
+                     {
+                         Console.WriteLine("OnAuthenticationFailed: " + context.Exception.Message);
+                         return Task.CompletedTask;
+                     },
+                     OnTokenValidated = context =>
+                     {
+                         Console.WriteLine("OnTokenValidated: " + context.SecurityToken);
+                         return Task.CompletedTask;
+                     }
+                 };
+             });
+#endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -56,6 +90,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
